@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Image Placeholder</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            text-align: center;
+        }
+        .placeholder {
+            width: 300px;
+            margin: 20px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .image-box {
+            width: 150px;
+            height: 150px;
+            margin: 0 auto;
+            background-color: #ddd;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            color: #666;
+        }
+        h2 {
+            margin-top: 20px;
+            color: #333;
+        }
+        p {
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Team Member Image Placeholders</h1>
+        <p>Right-click each image and save it to use in your website</p>
+        
+        <div class="placeholder">
+            <div class="image-box" id="harsh">HD</div>
+            <h2>Harsh Doshi</h2>
+            <p>Full Stack Developer</p>
+        </div>
+        
+        <div class="placeholder">
+            <div class="image-box" id="rishit">RR</div>
+            <h2>Rishit Rathod</h2>
+            <p>Full Stack Developer</p>
+        </div>
+        
+        <div class="placeholder">
+            <div class="image-box" id="krish">KM</div>
+            <h2>Krish Mamtora</h2>
+            <p>Full Stack Developer</p>
+        </div>
+    </div>
+    
+    <script>
+        // Generate canvas elements for each placeholder
+        function createImageFromCanvas(id, initials, color) {
+            const element = document.getElementById(id);
+            const canvas = document.createElement('canvas');
+            canvas.width = 150;
+            canvas.height = 150;
+            const ctx = canvas.getContext('2d');
+            
+            // Draw circle
+            ctx.beginPath();
+            ctx.arc(75, 75, 75, 0, Math.PI * 2, true);
+            ctx.closePath();
+            ctx.fillStyle = color;
+            ctx.fill();
+            
+            // Draw text
+            ctx.font = 'bold 60px Arial';
+            ctx.fillStyle = 'white';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText(initials, 75, 75);
+            
+            // Replace div with image
+            const img = document.createElement('img');
+            img.src = canvas.toDataURL('image/png');
+            img.style.borderRadius = '50%';
+            img.width = 150;
+            img.height = 150;
+            img.alt = initials;
+            img.title = 'Right-click and Save Image As...';
+            element.parentNode.replaceChild(img, element);
+        }
+        
+        // Create images with different colors
+        createImageFromCanvas('harsh', 'HD', '#3498db');
+        createImageFromCanvas('rishit', 'RR', '#e74c3c');
+        createImageFromCanvas('krish', 'KM', '#2ecc71');
+    </script>
+</body>
+</html>
